@@ -12,22 +12,60 @@
 예제입출력
 13 -> 3
  */
-
-console.log(58 - 6 - 12 - 18 - 24);
-
 // 입력: number
 // 출력: number
-// 6n 빼서 처음으로 음수 나올 때까지
-// 뺀 이전 값 저장
-const 벌집 = (number) => {
-	let i = 1;
-	let temp = 0;
-	while (true) {
-		temp = number - (6 * i);
-		if ( temp - (6 * i) < 0) break;
-		i++;
-	}
-	console.log(i);
-}
+// 6n 범위 구하기
+const fs = require('fs');
+const input = fs.readFileSync('/dev/stdin').toString().trim();
 
-벌집(58)
+// 시간초과?
+const 벌집 = (number) => {
+  let i = 0;
+  let temp = 1;
+  while (true) {
+    temp = temp + 6 * i;
+    const first = temp;
+    const second = 6 * (i + 1) + temp;
+    if (number > first && number <= second) {
+      i++;
+      break;
+    }
+    i++;
+  }
+  // 첫번째 1번방 값을 안 넣어서 +1
+  return i + 1;
+};
+
+console.log(벌집(Number(input)));
+
+// 재시도
+
+const 벌집 = (number) => {
+  let i = 0;
+  let first = 1;
+  let second = 7;
+  while (number >= second) {
+    first = second;
+    second += 6 * (i + 1);
+    i++;
+  }
+
+  // 첫번째 1번방 값을 안 넣어서 +1
+  return i + 1;
+};
+
+console.log(벌집(Number(input)));
+
+// 남의 답 구경
+
+const 벌집 = (number) => {
+  let range = 1,
+    block = 1;
+  while (block < number) {
+    block += 6 * range;
+    range++;
+  }
+  return range;
+};
+
+console.log(벌집(Number(input)));
