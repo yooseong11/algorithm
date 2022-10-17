@@ -38,6 +38,7 @@ for (let i = 0; i < n; i++) {
 	const 부녀회장 = (floor, room) => {
 		const APT = [];
 
+		// 아파트에 필요한 층 수 만큼 빈 [] 추가
 		let floorTemp = floor;
 		while (floorTemp >= 0) {
 			APT.push([]);
@@ -50,12 +51,15 @@ for (let i = 0; i < n; i++) {
 			APT[0][n] = n + 1;
 			n++;
 		}
+		
+		// 모든층 1호수 값 1로 셋팅
 		let m = 0;
 		while (m <= floor) {
 			APT[m][0] = 1;
 			m++;
 		}
-
+		
+		// 1층부터 2호수 이상 값구하기
 		let i = 1;
 		while (i <= floor) {
 			let j = 1;
@@ -65,10 +69,14 @@ for (let i = 0; i < n; i++) {
 			}
 			i++;
 		}
-	
+		
 		return APT[floor][room - 1];
 	}
 	console.log(
 		부녀회장(k,l));
 }
 
+
+//고민 
+// 외부에 for로 감싼 거 너무 무식하지 않나, input값 더 예쁘게 나눌 수 없을까 ?
+// 0층이랑 1호수 값 설정한 것도 좀 무식한 것 같다. 수학 공식으로 예쁘게 풀 수 있을 듯
